@@ -3,8 +3,6 @@
 See https://github.com/amontalenti/elements-of-python-style for more.
 """
 
-from __future__ import absolute_import
-
 import ast
 import json
 
@@ -15,7 +13,7 @@ from jinja2 import (
     PackageLoader,
 )
 
-from node_checkers import (
+from .node_checkers import (
     call,
     func,
     klass,
@@ -43,22 +41,30 @@ class CheckerVisitor(ast.NodeVisitor):
     def visit_Call(self, node):
         """Handle function call."""
         # func, args, keywords, starargs, kwargs
-        self.report.append(call.check(node))
+        report = call.check(node)
+        if report['errors']:
+            self.report.append(report)
         self.generic_visit(node)
 
     def visit_Module(self, node):
         """Handle the module."""
-        self.report.append(module.check(node))
+        report = module.check(node)
+        if report['errors']:
+            self.report.append(report)
         self.generic_visit(node)
 
     def visit_ClassDef(self, node):
         """Handle classes."""
-        self.report.append(klass.check(node))
+        report = klass.check(node)
+        if report['errors']:
+            self.report.append(report)
         self.generic_visit(node)
 
     def visit_FunctionDef(self, node):
         """Handle functions."""
-        self.report.append(func.check(node))
+        report = func.check(node)
+        if report['errors']:
+            self.report.append(report)
         self.generic_visit(node)
 
 

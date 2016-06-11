@@ -14,3 +14,12 @@ python checker.py -f testfile.py --html foo.html
 python checker.py -f testfile.py --jsonfile foo.json
 ```
 
+## Tests
+
+```sh
+pip install py.test
+cd tests
+py.test -v
+# Or, to view stdout
+py.test -s
+```

@@ -2,7 +2,7 @@
 
 import ast
 
-from errors import generic
+from ..errors import generic
 
 
 def check(node):
