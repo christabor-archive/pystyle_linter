@@ -1,4 +1,4 @@
-"""Checker for a class Call."""
+"""Checker for a function call."""
 
 
 def check(node):
